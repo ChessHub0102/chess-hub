@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="max-w-md mx-auto bg-chess-white/90 rounded-xl shadow-chess p-8 border border-chess-board-dark/10">
+  <h2 class="text-3xl font-bold text-chess-primary mb-6 font-chess flex items-center">
+    <span class="bg-chess-gold/20 p-2 rounded-full mr-3 text-chess-gold">♟</span>
+    {% if session.get('is_admin') %}Admin{% else %}Organizer{% endif %} Login
+  </h2>
+
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      <div class="bg-red-100 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-6">
+        {% for message in messages %}
+        <div class="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-6 flex items-center">
+          <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
+          </svg>
+          {{ message }}
+        </div>
+      {% endfor %}
+      </div>
+    {% endif %}
+  {% endwith %}
+
+  <form method="POST" action="{{ url_for('login') }}" class="space-y-6">
+    <div>
+      <label for="username" class="block text-chess-primary font-medium mb-2">Username</label>
+      <input type="text" class="w-full p-3 border border-chess-board-dark/20 rounded-lg focus:ring-2 focus:ring-chess-gold/50 focus:border-chess-gold bg-white/80 shadow-sm" id="username" name="username" required>
+    </div>
+    
+    <div>
+      <label for="password" class="block text-chess-primary font-medium mb-2">Password</label>
+      <input type="password" class="w-full p-3 border border-chess-board-dark/20 rounded-lg focus:ring-2 focus:ring-chess-gold/50 focus:border-chess-gold bg-white/80 shadow-sm" id="password" name="password" required>
+    </div>
+
+    <div>
+      <button type="submit" class="w-full bg-chess-primary hover:bg-chess-primary/90 text-white px-6 py-3 rounded-lg transition-all duration-300 shadow-chess hover:shadow-chess-hover font-medium">Login</button>
+    </div>
+    
+    <p class="text-center text-chess-secondary mt-6">
+      Don't have an account? <a href="{{ url_for('register') }}" class="text-chess-primary hover:text-chess-accent font-medium">Register here</a>
+    </p>
+  </form>
+    {% if session.get('is_admin') %}
+    <p class="mt-4 text-chess-primary text-center">Note: Admins should use their administrator credentials</p>
+    {% endif %}
+</div>
+{% endblock %}

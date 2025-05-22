@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+{% block title %}Create Tournament{% endblock %}
+{% block content %}
+<div class="max-w-3xl mx-auto bg-chess-white/90 rounded-xl shadow-chess p-8 border border-chess-board-dark/10">
+  <h2 class="text-3xl font-bold text-chess-primary mb-6 font-chess flex items-center">
+    <span class="bg-chess-gold/20 p-2 rounded-full mr-3 text-chess-gold">♟</span>
+    Create Tournament
+  </h2>
+
+  <form method="POST" enctype="multipart/form-data">
+    <div class="space-y-6">
+      <div>
+        <label class="block text-chess-primary font-medium mb-2">Title</label>
+        <input type="text" name="title" class="w-full p-3 border border-chess-board-dark/20 rounded-lg focus:ring-2 focus:ring-chess-gold/50 focus:border-chess-gold bg-white/80 shadow-sm" required>
+      </div>
+    
+    <div class="mb-3">
+        <label class="form-label">FIDE Status</label>
+        <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" name="fide_status" id="fide_status">
+            <label class="form-check-label" for="fide_status">FIDE Rated Tournament</label>
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Prize Details</label>
+        <textarea name="prize_details" class="form-control" rows="3" required></textarea>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Age Range</label>
+        <div class="row">
+            <div class="col">
+                <label>Minimum Age</label>
+                <input type="number" class="form-control" name="min_age" min="5" max="60" value="18">
+            </div>
+            <div class="col">
+                <label>Maximum Age</label>
+                <input type="number" class="form-control" name="max_age" min="5" max="60" value="60">
+            </div>
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">City (Optional)</label>
+        <input type="text" name="city" class="form-control">
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Gender Category</label>
+        <select name="gender_category" class="form-select">
+            <option value="Open">Open</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Open">Open</option>
+        </select>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col">
+            <label class="form-label">Mode</label>
+            <select name="mode" class="form-select">
+                <option value="Online">Online</option>
+                <option value="Offline">Offline</option>
+            </select>
+        </div>
+        
+        <div class="col">
+            <label class="form-label">Format</label>
+            <select name="format" class="form-select">
+                <option value="Blitz">Blitz</option>
+                <option value="Rapid">Rapid</option>
+                <option value="Classical">Classical</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">State</label>
+        <select name="state" class="form-select">
+            <option value="Maharashtra">Maharashtra</option>
+            <option value="Delhi">Delhi</option>
+            <option value="Karnataka">Karnataka</option>
+            <!-- Add more Indian states -->
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Dates</label>
+        <div class="row g-2">
+            <div class="col">
+                <input type="date" name="start_date" class="form-control" required>
+            </div>
+            <div class="col">
+                <input type="date" name="end_date" class="form-control" required>
+            </div>
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Description (optional)</label>
+        <textarea name="description" class="form-control" rows="3"></textarea>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Attach File (optional)</label>
+        <input type="file" name="file" class="form-control">
+        <small class="form-text text-muted">PDF or image files only</small>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Entry Fee (₹)</label>
+        <input type="number" name="entry_fee" class="form-control" min="0" required>
+    </div>
+      <button type="submit" class="w-full bg-chess-gold text-chess-dark px-6 py-3 rounded-lg font-medium hover:bg-chess-gold-dark transition-colors">
+        Create Tournament
+      </button>
+    </div>
+  </form>
+</div>
+{% endblock %}

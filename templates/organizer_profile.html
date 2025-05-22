@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% block title %}Organizer Profile{% endblock %}
+
+{% block content %}
+<div class="bg-chess-white rounded-xl shadow-chess overflow-hidden border border-chess-board-dark/10 p-6">
+  <div class="max-w-4xl mx-auto">
+    <!-- Profile Header -->
+    <div class="mb-8">
+      <h2 class="text-3xl sm:text-4xl font-bold text-chess-primary mb-2 font-chess">{{ organizer.name }}</h2>
+      <p class="text-chess-secondary text-lg">@{{ organizer.username }}</p>
+    </div>
+    
+    <!-- Organizer Details -->
+    <div class="mb-8">
+      <h5 class="text-xl sm:text-2xl font-semibold mb-4 text-chess-dark">Organizer Details</h5>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 bg-chess-light/50 p-4 rounded-lg">
+        <div>
+          <p class="mb-2"><span class="font-medium">Type:</span> {{ organizer.type|title }}</p>
+          <p class="mb-2"><span class="font-medium">Location:</span> {{ organizer.location }}</p>
+          {% if organizer.contact.website %}
+          <p class="mb-2"><span class="font-medium">Website:</span> 
+            <a href="{{ organizer.contact.website }}" class="text-chess-primary hover:underline">{{ organizer.contact.website }}</a>
+          </p>
+          {% endif %}
+        </div>
+        {% if organizer.about %}
+        <div>
+          <p class="mb-2"><span class="font-medium">About:</span></p>
+          <p class="text-chess-secondary">{{ organizer.about }}</p>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+
+    <!-- Tournaments Section -->
+    <div class="mb-8">
+      <h5 class="text-xl sm:text-2xl font-semibold mb-4 text-chess-dark">Tournaments Organized</h5>
+      <div class="space-y-4">
+        {% for tournament in tournaments %}
+        <div class="bg-chess-light/50 p-4 rounded-lg hover:bg-chess-light transition-colors duration-300">
+          <h6 class="text-lg font-medium mb-2">
+            <a href="{{ url_for('tournament_detail', tournament_id=tournament._id) }}" class="text-chess-primary hover:text-chess-accent">{{ tournament.title }}</a>
+          </h6>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm">
+            <p><span class="font-medium">Dates:</span> {{ tournament.dates|join(', ') }}</p>
+            <p><span class="font-medium">Location:</span> {{ tournament.state }} ({{ tournament.mode }})</p>
+            <p><span class="font-medium">Created:</span> {{ tournament.created_at.strftime('%Y-%m-%d') }}</p>
+          </div>
+        </div>
+        {% else %}
+        <p class="text-chess-secondary italic">No tournaments created yet</p>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="flex flex-col sm:flex-row gap-4 mt-6">
+      <a href="{{ url_for('dashboard') }}" class="bg-chess-primary hover:bg-chess-primary/90 text-white px-6 py-3 rounded-lg transition-all duration-300 shadow-chess hover:shadow-chess-hover text-center">Go to Dashboard</a>
+      <a href="{{ url_for('logout') }}" class="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-lg transition-all duration-300 shadow-chess hover:shadow-chess-hover text-center">Log Out</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

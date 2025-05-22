@@ -1,0 +1,161 @@
+{% extends 'base.html' %}
+{% block title %}{{ tournament.title }}{% endblock %}
+{% block content %}
+<div class="max-w-4xl mx-auto">
+  <div class="bg-chess-white rounded-xl shadow-chess overflow-hidden border border-chess-board-dark/10">
+    <div class="bg-gradient-to-r from-chess-primary to-chess-accent p-4 sm:p-8 text-white">
+      <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2 sm:gap-0">
+        <h2 class="text-2xl sm:text-3xl font-bold font-chess">{{ tournament.title }}</h2>
+        {% if tournament.fide_status %}
+        <span class="bg-chess-gold text-chess-dark text-sm font-bold px-4 py-1 rounded-full shadow-md self-start">FIDE RATED</span>
+        {% endif %}
+      </div>
+      <p class="text-sm opacity-90 mt-3">{{ tournament.dates|join(', ') }}</p>
+    </div>
+    
+    <div class="p-4 sm:p-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-8 mb-6 sm:mb-8">
+        <div class="space-y-4">
+          <div class="flex items-start">
+            <svg class="w-6 h-6 mr-3 mt-1 text-chess-primary flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path>
+            </svg>
+            <span class="text-chess-dark flex-1"><span class="font-medium text-chess-primary">Location:</span> {{ tournament.state }}{% if tournament.city %}, {{ tournament.city }}{% endif %}</span>
+          </div>
+          <div class="flex items-start">
+            <svg class="w-6 h-6 mr-3 mt-1 text-chess-primary flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+              <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"></path>
+            </svg>
+            <span class="text-chess-dark flex-1"><span class="font-medium text-chess-primary">Mode:</span> {{ tournament.mode }}</span>
+          </div>
+          <div class="flex items-start">
+            <svg class="w-5 h-5 mr-2 mt-1 text-chess-accent flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
+            </svg>
+            <span class="flex-1"><span class="font-medium">Format:</span> {{ tournament.format }}</span>
+          </div>
+        </div>
+        
+        <div class="space-y-3">
+          <div class="flex items-start">
+            <svg class="w-5 h-5 mr-2 mt-1 text-chess-accent flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+              <path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z"></path>
+            </svg>
+            <span class="flex-1"><span class="font-medium">Age Category:</span> {{ tournament.age_categories|join(', ') }}</span>
+          </div>
+          <div class="flex items-start">
+            <svg class="w-5 h-5 mr-2 mt-1 text-chess-accent flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>
+            </svg>
+            <span class="flex-1"><span class="font-medium">Gender Category:</span> {{ tournament.gender_category }}</span>
+          </div>
+          <div class="flex items-center">
+            <svg class="w-5 h-5 mr-2 text-chess-accent" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path>
+            </svg>
+            <span><span class="font-medium">Prize Pool:</span> {{ tournament.prize_details }}</span>
+          </div>
+        </div>
+      </div>
+
+     {% if tournament.description %}
+    <div class="mb-6 bg-gray-50 p-4 rounded-lg border border-gray-200">
+      <h3 class="text-xl font-semibold mb-3 text-chess-dark flex items-center">
+        <svg class="w-5 h-5 mr-2 text-chess-accent" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+        </svg>
+        Description
+      </h3>
+      <div class="prose max-w-none text-gray-700">
+        {{ tournament.description|safe }}
+      </div>
+    </div>
+    {% endif %}
+
+    {% if tournament.files %}
+    <div class="mb-6 bg-gray-50 p-4 rounded-lg border border-gray-200">
+      <h3 class="text-xl font-semibold mb-3 text-chess-dark flex items-center">
+        <svg class="w-5 h-5 mr-2 text-chess-accent" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z" clip-rule="evenodd"></path>
+        </svg>
+        Tournament Files
+      </h3>
+      <ul class="space-y-2">
+        {% for file in tournament.files %}
+        <li class="flex items-center bg-white p-2 rounded border border-gray-200 hover:bg-gray-50 transition-colors">
+          <svg class="w-5 h-5 mr-2 text-chess-accent" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+          </svg>
+          <a href="{{ url_for('download_file', filename=file) }}" class="text-chess-accent hover:underline">
+            {{ file }}
+          </a>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+
+    {% if organizer.contact %}
+    <div class="mb-6 bg-gray-50 p-4 rounded-lg border border-gray-200">
+      <h3 class="text-xl font-semibold mb-3 text-chess-dark flex items-center">
+        <svg class="w-5 h-5 mr-2 text-chess-accent" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+          <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path>
+        </svg>
+        Contact Organizer
+      </h3>
+      <ul class="space-y-2">
+        {% if organizer.contact.whatsapp %}
+        <li class="flex items-center">
+          <svg class="w-5 h-5 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2 5a2 2 0 012-2h7a2 2 0 012 2v4a2 2 0 01-2 2H9l-3 3v-3H4a2 2 0 01-2-2V5z"></path>
+            <path d="M15 7v2a4 4 0 01-4 4H9.828l-1.766 1.767c.28.149.599.233.938.233h2l3 3v-3h2a2 2 0 002-2V9a2 2 0 00-2-2h-1z"></path>
+          </svg>
+          <span class="font-medium">WhatsApp:</span> <span class="ml-1">{{ organizer.contact.whatsapp }}</span>
+        </li>
+        {% endif %}
+        {% if organizer.contact.email %}
+        <li class="flex items-center">
+          <svg class="w-5 h-5 mr-2 text-blue-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
+            <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
+          </svg>
+          <span class="font-medium">Email:</span> <span class="ml-1">{{ organizer.contact.email }}</span>
+        </li>
+        {% endif %}
+      </ul>
+    </div>
+    {% endif %}
+
+    <div class="flex flex-wrap gap-2 mt-6">
+      <a href="whatsapp://send?text=Check out this tournament: {{ request.url }}" 
+         class="flex items-center bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg transition-colors"
+         data-action="share/whatsapp/share">
+        <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+        </svg>
+        WhatsApp
+      </a>
+      <a href="tg://msg_url?url={{ request.url }}&text=Check out this chess tournament" 
+         class="flex items-center bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition-colors">
+        <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.96 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+        </svg>
+        Telegram
+      </a>
+      <a href="mailto:?subject=Chess Tournament&body=Check out this tournament: {{ request.url }}"
+         class="flex items-center bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg transition-colors">
+        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+        </svg>
+        Email
+      </a>
+      <a href="/" class="flex items-center bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded-lg transition-colors">
+        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+        </svg>
+        Back to List
+      </a>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,41 @@
+## ✅ *Organizer — Registration Form*
+
+Organizers must register to create and manage tournaments. These fields help build trust:
+
+1. *Organizer Type*
+
+   * Individual / Club / Academy / School / Other (dropdown)
+
+2. *Full Name or Organization Name*
+
+   * Text (shown publicly)
+
+3. *Username*
+
+   * Unique handle (e.g., @delhichessclub) — shown publicly
+
+4. *Email Address*
+
+   * Required for account and communication
+
+5. *Phone / WhatsApp Number* (Optional)
+
+   * For players to contact (if organizer chooses)
+
+6. *State & City*
+
+   * Location of the organizer
+
+7. *Website or Social Profile* (Optional)
+
+   * Link (Facebook page, academy site, etc.)
+
+8. *About Organizer* (Optional)
+
+   * Short bio or mission (e.g., “We promote chess in rural Gujarat”)
+
+9. *Password & Confirm Password*
+
+   * For login
+
+> ✅ Only username, name, city/state, and optional contact links will show on public profile.

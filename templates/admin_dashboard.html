@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="max-w-7xl mx-auto px-4 py-8">
+  <h1 class="text-3xl font-bold text-chess-primary mb-8 flex items-center">
+    <span class="bg-chess-gold/20 p-2 rounded-full mr-3 text-chess-gold">👑</span>
+    Admin Dashboard
+  </h1>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <a href="{{ url_for('admin_featured') }}" class="bg-chess-white p-6 rounded-xl shadow-chess hover:shadow-chess-lg transition-shadow">
+      <h2 class="text-xl font-semibold text-chess-primary mb-2">Featured Tournaments</h2>
+      <p class="text-chess-secondary">Manage which tournaments are featured on the homepage</p>
+    </a>
+
+    <div class="bg-chess-white p-6 rounded-xl shadow-chess">
+      <h2 class="text-xl font-semibold text-chess-primary mb-4">User Management</h2>
+      <div class="space-y-3">
+        <button class="w-full text-left p-3 bg-chess-bg hover:bg-chess-bg-dark rounded-lg">
+          Pending Organizer Approvals (3)
+        </button>
+        <button class="w-full text-left p-3 bg-chess-bg hover:bg-chess-bg-dark rounded-lg">
+          Manage User Permissions
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

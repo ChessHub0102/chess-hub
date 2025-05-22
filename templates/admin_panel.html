@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+  <div class="flex justify-between items-center mb-8">
+    <h1 class="text-3xl font-bold text-chess-primary">Admin Dashboard</h1>
+    <a href="{{ url_for('logout') }}" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg transition-colors">Logout</a>
+  </div>
+  
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+    <div class="bg-white rounded-lg shadow p-6">
+      <h2 class="text-xl font-semibold text-chess-primary mb-4">Tournaments</h2>
+      <div class="space-y-4">
+        {% for tournament in tournaments %}
+        <div class="border-b border-gray-200 pb-4">
+          <h3 class="font-medium text-chess-primary">{{ tournament.title }}</h3>
+          <p class="text-sm text-gray-600">{{ tournament.state }} • {{ tournament.dates[0]|datetimeformat }}</p>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    
+    <div class="bg-white rounded-lg shadow p-6">
+      <h2 class="text-xl font-semibold text-chess-primary mb-4">Organizers</h2>
+      <div class="space-y-4">
+        {% for organizer in organizers %}
+        <div class="border-b border-gray-200 pb-4">
+          <h3 class="font-medium text-chess-primary">{{ organizer.name }}</h3>
+          <p class="text-sm text-gray-600">{{ organizer.username }} • {{ organizer.type }}</p>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,221 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="max-w-7xl mx-auto">
+  <div class="flex flex-col md:flex-row justify-between items-center mb-8 sm:mb-12">
+    <div>
+      <h2 class="text-3xl sm:text-4xl font-bold text-chess-primary mb-2 font-chess flex items-center">
+        <span class="bg-chess-gold/20 p-2 rounded-full mr-3 text-chess-gold">♟</span>
+        Upcoming Tournaments
+      </h2>
+      <p class="text-chess-secondary ml-6 sm:ml-12 text-base sm:text-lg">Discover and join chess tournaments across the country</p>
+    </div>
+    <a href="{{ url_for('create_tournament') }}" class="mt-6 md:mt-0 bg-chess-primary hover:bg-chess-primary/90 text-white px-6 sm:px-8 py-3 rounded-lg transition-all duration-300 shadow-chess hover:shadow-chess-hover flex items-center transform hover:-translate-y-1 font-medium w-full md:w-auto justify-center md:justify-start">
+      <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+      </svg>
+      Create Tournament
+    </a>
+  </div>
+
+  <div class="bg-chess-board-light/30 rounded-xl shadow-chess p-4 sm:p-8 mb-8 sm:mb-12 border border-chess-board-dark/20">
+    <h3 class="text-xl sm:text-2xl font-semibold mb-4 sm:mb-6 text-chess-primary border-b border-chess-board-dark/20 pb-3 font-chess">Find Your Next Tournament</h3>
+    <form method="GET" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 px-2 sm:px-4 md:px-0">
+      <div class="col-md-3">
+        <label class="block text-chess-primary font-medium mb-2">State</label>
+        <select name="state" class="w-full p-3 border border-chess-board-dark/20 rounded-lg focus:ring-2 focus:ring-chess-gold/50 focus:border-chess-gold bg-white/80 shadow-sm">
+          <option value="">All States</option>
+          <option value="Andhra Pradesh">Andhra Pradesh</option>
+          <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+          <option value="Assam">Assam</option>
+          <option value="Bihar">Bihar</option>
+          <option value="Chhattisgarh">Chhattisgarh</option>
+          <option value="Goa">Goa</option>
+          <option value="Gujarat">Gujarat</option>
+          <option value="Haryana">Haryana</option>
+          <option value="Himachal Pradesh">Himachal Pradesh</option>
+          <option value="Jharkhand">Jharkhand</option>
+          <option value="Karnataka">Karnataka</option>
+          <option value="Kerala">Kerala</option>
+          <option value="Madhya Pradesh">Madhya Pradesh</option>
+          <option value="Maharashtra">Maharashtra</option>
+          <option value="Manipur">Manipur</option>
+          <option value="Meghalaya">Meghalaya</option>
+          <option value="Mizoram">Mizoram</option>
+          <option value="Nagaland">Nagaland</option>
+          <option value="Odisha">Odisha</option>
+          <option value="Punjab">Punjab</option>
+          <option value="Rajasthan">Rajasthan</option>
+          <option value="Sikkim">Sikkim</option>
+          <option value="Tamil Nadu">Tamil Nadu</option>
+          <option value="Telangana">Telangana</option>
+          <option value="Tripura">Tripura</option>
+          <option value="Uttar Pradesh">Uttar Pradesh</option>
+          <option value="Uttarakhand">Uttarakhand</option>
+          <option value="West Bengal">West Bengal</option>
+          <option value="Andaman and Nicobar">Andaman and Nicobar</option>
+          <option value="Chandigarh">Chandigarh</option>
+          <option value="Dadra and Nagar Haveli">Dadra and Nagar Haveli</option>
+          <option value="Daman and Diu">Daman and Diu</option>
+          <option value="Delhi">Delhi</option>
+          <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+          <option value="Ladakh">Ladakh</option>
+          <option value="Lakshadweep">Lakshadweep</option>
+          <option value="Puducherry">Puducherry</option>
+        </select>
+      </div>
+      
+      <div class="col-md-2">
+        <label class="block text-chess-primary font-medium mb-2">Format</label>
+        <select name="format" class="w-full p-3 border border-chess-board-dark/20 rounded-lg focus:ring-2 focus:ring-chess-gold/50 focus:border-chess-gold bg-white/80 shadow-sm">
+          <option value="">All Formats</option>
+          <option value="Blitz">Blitz</option>
+          <option value="Rapid">Rapid</option>
+          <option value="Classical">Classical</option>
+        </select>
+      </div>
+
+      <div class="col-md-2">
+        <label class="block text-chess-primary font-medium mb-2">Rating</label>
+        <div class="flex items-center mt-3">
+          <input class="form-checkbox h-5 w-5 text-chess-gold focus:ring-chess-gold/50 border-chess-board-dark/30 rounded" type="checkbox" name="fide" value="yes" id="fide">
+          <label class="ml-2 text-chess-dark" for="fide">FIDE Rated Only</label>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <label class="block text-chess-primary font-medium mb-2">Date Range</label>
+        <div class="grid grid-cols-2 gap-2">
+          <input type="date" name="start_date" class="w-full p-3 border border-chess-board-dark/20 rounded-lg focus:ring-2 focus:ring-chess-gold/50 focus:border-chess-gold bg-white/80 shadow-sm" placeholder="From">
+          <input type="date" name="end_date" class="w-full p-3 border border-chess-board-dark/20 rounded-lg focus:ring-2 focus:ring-chess-gold/50 focus:border-chess-gold bg-white/80 shadow-sm" placeholder="To">
+        </div>
+      </div>
+
+      <div class="col-md-2 flex items-end">
+        <button type="submit" class="bg-chess-primary hover:bg-chess-primary/90 text-white px-6 py-3 rounded-lg transition-all duration-300 w-full shadow-chess hover:shadow-chess-hover font-medium flex items-center justify-center">
+          <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+          </svg>
+          Filter
+        </button>
+      </div>
+      <div class="col-span-1">
+        <label class="block text-sm font-medium text-gray-700 mb-1">Format</label>
+        <select name="format" class="w-full rounded-md border-gray-300 shadow-sm focus:border-chess-accent focus:ring focus:ring-chess-accent focus:ring-opacity-50">
+          <option value="">All Formats</option>
+          <option value="Blitz">Blitz</option>
+          <option value="Rapid">Rapid</option>
+          <option value="Classical">Classical</option>
+        </select>
+      </div>
+      
+      <div class="col-span-1">
+        <label class="block text-sm font-medium text-gray-700 mb-1">Mode</label>
+        <select name="mode" class="w-full rounded-md border-gray-300 shadow-sm focus:border-chess-accent focus:ring focus:ring-chess-accent focus:ring-opacity-50">
+          <option value="">All Modes</option>
+          <option value="Online">Online</option>
+          <option value="Offline">Offline</option>
+        </select>
+      </div>
+      
+      <div class="col-span-3 flex justify-end mt-4">
+        <button type="submit" class="bg-chess-dark hover:bg-opacity-80 text-white px-6 py-2 rounded-lg transition-colors shadow-md flex items-center">
+          <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+          </svg>
+          Find Tournaments
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
+  {% for tournament in tournaments %}
+  <div class="bg-chess-white rounded-xl shadow-chess overflow-hidden border border-chess-board-dark/10 hover:shadow-chess-hover transition-all duration-300 flex flex-col transform hover:-translate-y-1">
+    <div class="bg-gradient-to-r from-chess-primary to-chess-accent p-6 text-white">
+      <div class="flex justify-between items-start">
+        <h3 class="text-xl font-bold truncate font-chess">{{ tournament.title }}</h3>
+        <div class="flex gap-2">
+          {% if tournament.featured %}
+          <span class="bg-chess-primary text-white text-xs font-bold px-3 py-1 rounded-full shadow-md">Featured</span>
+          {% endif %}
+          {% if tournament.fide_status %}
+          <span class="bg-chess-gold text-chess-dark text-xs font-bold px-3 py-1 rounded-full shadow-md">FIDE</span>
+          {% endif %}
+        </div>
+      </div>
+      <p class="text-sm opacity-90 mt-2">{{ tournament.dates|join(', ') }}</p>
+    </div>
+    
+    <div class="p-6 flex-grow">
+      <div class="grid grid-cols-2 gap-4 text-sm mb-5">
+        <div class="flex items-center">
+          <svg class="w-5 h-5 mr-2 text-chess-primary" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path>
+          </svg>
+          <span class="text-chess-dark">{{ tournament.state }}</span>
+        </div>
+        <div class="flex items-center">
+          <svg class="w-5 h-5 mr-2 text-chess-primary" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
+          </svg>
+          <span class="text-chess-dark">{{ tournament.format }}</span>
+        </div>
+        <div class="flex items-center">
+          <svg class="w-5 h-5 mr-2 text-chess-primary" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"></path>
+          </svg>
+          <span class="text-chess-dark">{{ tournament.gender_category }}</span>
+        </div>
+        <div class="flex items-center">
+          <svg class="w-5 h-5 mr-2 text-chess-primary" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <path d="M5.3 19.6c-.2-.2-.3-.4-.3-.7v-1c0-.8.3-1.6.7-2.2-.4-.1-.7-.3-1-.6-.3-.2-.4-.5-.4-.8 0-.3.1-.6.4-.8.3-.2.6-.4.9-.4V8.5c0-.7.3-1.3.7-1.8.4-.5 1-.7 1.7-.7.7 0 1.3.2 1.7.7.4.5.7 1.1.7 1.8v4.6c.3 0 .6.2.9.4.3.2.4.5.4.8 0 .3-.1.6-.4.8-.3.2-.6.4-1 .6.4.6.7 1.4.7 2.2v1c0 .3-.1.5-.3.7-.2.2-.4.3-.7.3H6c-.3 0-.5-.1-.7-.3z"></path>
+          </svg>
+          <span class="text-chess-dark">{{ tournament.mode }}</span>
+        </div>
+      </div>
+      <div class="grid grid-cols-2 gap-4 text-sm mb-5">
+        <div class="flex items-center bg-chess-gold/10 px-3 py-1 rounded-lg">
+          <svg class="w-5 h-5 mr-2 text-chess-gold" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>
+          </svg>
+          <span class="text-chess-dark font-medium">
+            {% if tournament.age_categories and tournament.age_categories|length > 0 %}
+              <span class="font-semibold">Age Range:</span> {{ tournament.age_categories|join(', ') }}
+            {% else %}
+              <span class="font-semibold">Age Range:</span> All Ages Welcome
+            {% endif %}
+          </span>
+        </div>
+        <div class="flex items-center">
+          <svg class="w-5 h-5 mr-2 text-chess-primary" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path>
+          </svg>
+          <span class="text-chess-dark">Entry Fee: ₹{{ tournament.entry_fee }}</span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="border-t border-chess-board-dark/10 p-5 flex justify-between items-center mt-auto">
+      <span class="text-lg font-semibold text-chess-primary font-chess">{{ tournament.format }}</span>
+      <a href="{{ url_for('tournament_detail', tournament_id=tournament._id) }}" class="bg-chess-primary hover:bg-chess-primary/90 text-white px-5 py-2 rounded-lg transition-all duration-300 shadow-sm hover:shadow-md flex items-center">
+        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+        </svg>
+        View Details
+      </a>
+    </div>
+  </div>
+  {% else %}
+  <div class="col-span-full bg-blue-50 border border-blue-200 text-blue-700 p-4 rounded-lg">
+    <div class="flex items-center">
+      <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+      </svg>
+      <p>No tournaments found matching your criteria</p>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

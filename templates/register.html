@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% block title %}Organizer Registration{% endblock %}
+{% block content %}
+<div class="max-w-lg mx-auto bg-chess-white/90 rounded-xl shadow-chess p-4 sm:p-8 border border-chess-board-dark/10">
+  <h2 class="text-3xl font-bold text-chess-primary mb-6 font-chess flex items-center">
+    <span class="bg-chess-gold/20 p-2 rounded-full mr-3 text-chess-gold">♟</span>
+    Organizer Registration
+  </h2>
+  
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      <div class="bg-red-100 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-6">
+        {{ messages[0] }}
+      </div>
+    {% endif %}
+  {% endwith %}
+  
+  <form method="POST" class="space-y-5">
+    <div>
+      <label class="block text-chess-primary font-medium mb-2">Username</label>
+      <input type="text" name="username" class="w-full p-3 border border-chess-board-dark/20 rounded-lg focus:ring-2 focus:ring-chess-gold/50 focus:border-chess-gold bg-white/80 shadow-sm" required>
+    </div>
+    
+    <div>
+      <label class="block text-chess-primary font-medium mb-2">Password</label>
+      <input type="password" name="password" class="w-full p-3 border border-chess-board-dark/20 rounded-lg focus:ring-2 focus:ring-chess-gold/50 focus:border-chess-gold bg-white/80 shadow-sm" required
+       minlength="8" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
+       title="Minimum 8 characters with at least one uppercase letter, one lowercase letter, one number, and one special character (@$!%*?&)">
+    </div>
+    
+    <div>
+      <label class="block text-chess-primary font-medium mb-2">Organizer Name</label>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+  <div>
+    <label class="block text-chess-primary font-medium mb-2">Organizer Type</label>
+    <select name="type" class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-chess-gold/50 focus:border-chess-gold bg-white/80 shadow-sm text-base" required>
+      <option value="individual">Individual</option>
+      <option value="club">Chess Club</option>
+      <option value="academy">Academy</option>
+      <option value="school">School</option>
+      <option value="other">Other</option>
+    </select>
+  </div>
+  <div>
+    <label class="block text-chess-primary font-medium mb-2">State & City</label>
+    <input type="text" name="location" class="w-full p-3 border border-chess-board-dark/20 rounded-lg focus:ring-2 focus:ring-chess-gold/50 focus:border-chess-gold bg-white/80 shadow-sm" required>
+  </div>
+</div>
+<input type="text" name="name" class="w-full p-3 mt-4 border border-chess-board-dark/20 rounded-lg focus:ring-2 focus:ring-chess-gold/50 focus:border-chess-gold bg-white/80 shadow-sm" required placeholder="Organization/Full Name">
+    </div>
+    
+    <div class="space-y-3">
+  <label class="block text-chess-primary font-medium mb-2">Contact Info (optional)</label>
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+    <input type="text" name="whatsapp" class="w-full p-3 border border-chess-board-dark/20 rounded-lg focus:ring-2 focus:ring-chess-gold/50 focus:border-chess-gold bg-white/80 shadow-sm" placeholder="WhatsApp">
+    <input type="email" name="email" class="w-full p-3 border border-chess-board-dark/20 rounded-lg focus:ring-2 focus:ring-chess-gold/50 focus:border-chess-gold bg-white/80 shadow-sm" placeholder="Email">
+  </div>
+</div>
+
+<div class="space-y-3">
+  <label class="block text-chess-primary font-medium mb-2">Website/Social (optional)</label>
+  <input type="url" name="website" class="w-full p-3 border border-chess-board-dark/20 rounded-lg focus:ring-2 focus:ring-chess-gold/50 focus:border-chess-gold bg-white/80 shadow-sm" placeholder="https://example.com">
+</div>
+
+<div class="space-y-3">
+  <label class="block text-chess-primary font-medium mb-2">About (optional)</label>
+  <textarea name="about" class="w-full p-3 border border-chess-board-dark/20 rounded-lg focus:ring-2 focus:ring-chess-gold/50 focus:border-chess-gold bg-white/80 shadow-sm" rows="3"></textarea>
+</div>
+    
+    <div class="pt-2">
+      <button type="submit" class="w-full bg-chess-primary hover:bg-chess-primary/90 text-white px-6 py-3 rounded-lg transition-all duration-300 shadow-chess hover:shadow-chess-hover font-medium">Register</button>
+    </div>
+    
+    <p class="text-center text-chess-secondary mt-4">
+      Already have an account? <a href="{{ url_for('login') }}" class="text-chess-primary hover:text-chess-accent font-medium">Login here</a>
+    </p>
+  </form>
+</div>
+{% endblock %}

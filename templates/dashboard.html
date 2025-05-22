@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+<div class="max-w-7xl mx-auto">
+  <div class="flex flex-col md:flex-row justify-between items-center mb-8 sm:mb-12">
+    <div>
+      <h2 class="text-3xl sm:text-4xl font-bold text-chess-primary mb-2 font-chess flex items-center">
+        <span class="bg-chess-gold/20 p-2 rounded-full mr-3 text-chess-gold">♟</span>
+        Organizer Dashboard
+      </h2>
+      <p class="text-chess-secondary ml-6 sm:ml-12 text-base sm:text-lg">Manage your chess tournaments</p>
+    </div>
+    <div class="flex flex-col md:flex-row gap-4 mt-6 md:mt-0 w-full md:w-auto">
+      
+      <a href="{{ url_for('create_tournament') }}" class="bg-chess-primary hover:bg-chess-primary/90 text-white px-6 sm:px-8 py-3 rounded-lg transition-all duration-300 shadow-chess hover:shadow-chess-hover flex items-center transform hover:-translate-y-1 font-medium justify-center">
+        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+        </svg>
+        Create New Tournament
+      </a>
+    </div>
+  </div>
+  
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 px-2 sm:px-4 md:px-0">
+  {% for tournament in tournaments %}
+  <div class="bg-chess-white rounded-xl shadow-chess overflow-hidden border border-chess-board-dark/10 hover:shadow-chess-hover transition-all duration-300 flex flex-col transform hover:-translate-y-1">
+    <div class="bg-gradient-to-r from-chess-primary to-chess-accent p-6 text-white">
+      <div class="flex justify-between items-start">
+        <h3 class="text-xl font-bold truncate font-chess">{{ tournament.title }}</h3>
+        {% if tournament.fide_status %}
+        <span class="bg-chess-gold text-chess-dark text-xs font-bold px-3 py-1 rounded-full shadow-md">FIDE</span>
+        {% endif %}
+      </div>
+      <p class="text-sm opacity-80">{{ tournament.dates|join(', ') }}</p>
+    </div>
+    
+    <div class="p-4 flex-grow">
+      <div class="grid grid-cols-2 gap-2 text-sm mb-4">
+        <div class="flex items-center">
+          <svg class="w-4 h-4 mr-1 text-chess-accent" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path>
+          </svg>
+          <span>{{ tournament.state }}</span>
+        </div>
+        <div class="flex items-center">
+          <svg class="w-4 h-4 mr-1 text-chess-accent" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"></path>
+          </svg>
+          <span>{{ tournament.format }}</span>
+        </div>
+        <div class="flex items-center">
+          <svg class="w-4 h-4 mr-1 text-chess-accent" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <path d="M5.3 19.6c-.2-.2-.3-.4-.3-.7v-1c0-.8.3-1.6.7-2.2-.4-.1-.7-.3-1-.6-.3-.2-.4-.5-.4-.8 0-.3.1-.6.4-.8.3-.2.6-.4.9-.4V8.5c0-.7.3-1.3.7-1.8.4-.5 1-.7 1.7-.7.7 0 1.3.2 1.7.7.4.5.7 1.1.7 1.8v4.6c.3 0 .6.2.9.4.3.2.4.5.4.8 0 .3-.1.6-.4.8-.3.2-.6.4-1 .6.4.6.7 1.4.7 2.2v1c0 .3-.1.5-.3.7-.2.2-.4.3-.7.3H6c-.3 0-.5-.1-.7-.3z"></path>
+          </svg>
+          <span>{{ tournament.mode }}</span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="border-t border-chess-board-dark/10 p-5 flex justify-between">
+      <a href="{{ url_for('tournament_detail', tournament_id=tournament._id) }}" class="bg-chess-primary hover:bg-chess-primary/90 text-white px-5 py-2 rounded-lg transition-all duration-300 shadow-sm hover:shadow-md flex items-center">
+        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+        </svg>
+        View Details
+      </a>
+
+    </div>
+  </div>
+  {% else %}
+  <div class="col-span-full bg-chess-board-light/30 border border-chess-board-dark/20 text-chess-primary p-8 rounded-xl shadow-chess">
+    <div class="flex items-center">
+      <svg class="w-8 h-8 mr-3 text-chess-gold" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+      </svg>
+      <p>No tournaments created yet. Create your first tournament using the button above!</p>
+    </div>
+  </div>
+  {% endfor %}
+  </div>
+</div>
+{% endblock %}

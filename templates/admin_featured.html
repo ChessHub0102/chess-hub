@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block title %}Admin - Featured Tournaments{% endblock %}
+{% block content %}
+<div class="max-w-7xl mx-auto">
+  <div class="flex flex-col md:flex-row justify-between items-center mb-8 sm:mb-12">
+    <div>
+      <h2 class="text-3xl sm:text-4xl font-bold text-chess-primary mb-2 font-chess flex items-center">
+        <span class="bg-chess-gold/20 p-2 rounded-full mr-3 text-chess-gold">♟</span>
+        Admin - Featured Tournaments
+      </h2>
+      <p class="text-chess-secondary ml-6 sm:ml-12 text-base sm:text-lg">Select tournaments to display on the home page</p>
+    </div>
+    <a href="{{ url_for('dashboard') }}" class="mt-6 md:mt-0 bg-chess-primary hover:bg-chess-primary/90 text-white px-6 sm:px-8 py-3 rounded-lg transition-all duration-300 shadow-chess hover:shadow-chess-hover flex items-center transform hover:-translate-y-1 font-medium w-full md:w-auto justify-center md:justify-start">
+      <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+      </svg>
+      Back to Dashboard
+    </a>
+  </div>
+  
+  <div class="bg-chess-white rounded-xl shadow-chess p-6 mb-8">
+    <form method="post" action="{{ url_for('admin_featured') }}">
+      <div class="mb-6">
+        <h3 class="text-xl font-bold text-chess-primary mb-4">Select Featured Tournaments</h3>
+        <p class="text-chess-secondary mb-4">These tournaments will be displayed on the home page. Unselected tournaments will only appear in search results.</p>
+      </div>
+
+      <div class="grid grid-cols-1 gap-4">
+        {% for tournament in all_tournaments %}
+        <div class="flex items-center p-4 border border-chess-board-dark/10 rounded-lg hover:bg-chess-board-light/10 transition-colors">
+          <input type="checkbox" name="featured_tournaments" value="{{ tournament._id }}" id="tournament-{{ tournament._id }}" class="mr-4 h-5 w-5 text-chess-primary focus:ring-chess-primary" {% if tournament.featured %}checked{% endif %}>
+          <label for="tournament-{{ tournament._id }}" class="flex-grow cursor-pointer">
+            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center">
+              <div>
+                <h4 class="font-bold text-chess-dark">{{ tournament.title }}</h4>
+                <p class="text-sm text-chess-secondary">{{ tournament.dates|join(', ') }} | {{ tournament.state }} ({{ tournament.mode }})</p>
+              </div>
+              <div class="mt-2 sm:mt-0">
+                {% if tournament.featured %}
+                <span class="bg-chess-gold text-chess-dark text-xs font-bold px-3 py-1 rounded-full shadow-sm">Currently Featured</span>
+                {% endif %}
+              </div>
+            </div>
+          </label>
+        </div>
+        {% endfor %}
+      </div>
+
+      <div class="mt-8 flex justify-end">
+        <button type="submit" class="bg-chess-primary hover:bg-chess-primary/90 text-white px-8 py-3 rounded-lg transition-all duration-300 shadow-chess hover:shadow-chess-hover font-medium">
+          Save Changes
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}
