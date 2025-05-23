@@ -317,4 +317,4 @@ if __name__ == '__main__':
         )
         print('Admin account verified!')
     
-    app.run()
+    app.run(port=1100)
