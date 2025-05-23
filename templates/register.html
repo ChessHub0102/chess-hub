@@ -27,6 +27,13 @@
        minlength="8" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
        title="Minimum 8 characters with at least one uppercase letter, one lowercase letter, one number, and one special character (@$!%*?&)">
     </div>
+
+    <div>
+      <label class="block text-chess-primary font-medium mb-2">Confirm Password</label>
+      <input type="password" name="confirm_password" class="w-full p-3 border border-chess-board-dark/20 rounded-lg focus:ring-2 focus:ring-chess-gold/50 focus:border-chess-gold bg-white/80 shadow-sm" required
+       minlength="8" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
+       title="Passwords must match">
+    </div>
     
     <div>
       <label class="block text-chess-primary font-medium mb-2">Organizer Name</label>

@@ -118,6 +118,12 @@ def register():
 
         # Password complexity validation
         password = request.form['password']
+        confirm_password = request.form['confirm_password']
+        
+        if password != confirm_password:
+            flash('Passwords do not match')
+            return redirect(url_for('register'))
+        
         if len(password) < 8:
             flash('Password must be at least 8 characters')
             return redirect(url_for('register'))
